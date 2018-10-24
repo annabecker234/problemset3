@@ -1,0 +1,57 @@
+Problem set 3
+
+#1. fhand = open('data/CO-OPS__8729108__wl.csv')
+largest=None
+for line in fhand:
+    columns=line.split(',')
+
+    try:
+        water_level=float(columns[1])
+    except:
+        continue
+    if largest is None or water_level>largest:
+        largest=water_level
+
+print("Highest water level:", largest)
+
+*What I did not figure out how to do - print [0] of largest, to have it print the date/time of the largest.
+
+#2.
+import pandas as pd
+
+table = pd.read_csv('data/CO-OPS__8729108__wl.csv')
+
+
+
+df.loc[df[‘ Water Level’].idxmax()]
+
+
+#3. “wldiff” = water level difference
+import pandas as pd
+
+table = pd.read_csv('data/CO-OPS__8729108__wl.csv')
+
+
+df = table
+df["wldiff"] = df[" Water Level"].diff(-1)
+
+
+df.loc[df["wldiff"].idxmax()]
+
+
+
+#4.
+import matplotlib.pyplot as plt
+import csv
+
+x=[]
+y=[]
+with open('data/CO-OPS__8729108__wl.csv') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    for row in plots:
+        #print(row)
+        x.append(row[1])
+        y.append(row[0])
+#print(x)
+plt.plot(x,y, label='Water Level over Time!')
+plt.show()
